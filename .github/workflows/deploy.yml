@@ -34,8 +34,8 @@ jobs:
       - name: Build Next.js app
         working-directory: ./frontend
         env:
-          # Replace with your actual Render backend URL after deployment
-          NEXT_PUBLIC_API_URL: ${{ secrets.API_URL || 'https://YOUR-BACKEND-URL.onrender.com' }}
+          # Use GitHub secret or fallback to your Render URL
+          NEXT_PUBLIC_API_URL: ${{ secrets.API_URL || 'https://real-estate-pricepredictor-ml.onrender.com' }}
         run: npm run build
         
       - name: Upload artifact

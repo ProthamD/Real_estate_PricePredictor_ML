@@ -18,8 +18,8 @@ Use this checklist to track your deployment progress!
 - [ ] Configured service settings:
   - [ ] Root Directory: `Backend`
   - [ ] Build Command: `pip install -r requirements.txt`
-  - [ ] Start Command: `gunicorn app:app --bind 0.0.0.0:$PORT`
-  - [ ] Instance Type: Free
+- [ ] Start Command: `gunicorn app:app --bind 0.0.0.0:$PORT`
+- [ ] Instance Type: Free
 - [ ] Deployment succeeded (check logs)
 - [ ] Copied backend URL (e.g., `https://real-estate-api-xxxx.onrender.com`)
 - [ ] Tested `/predict` endpoint with curl/PowerShell
