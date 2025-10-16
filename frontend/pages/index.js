@@ -23,19 +23,38 @@ export default function Home() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
+    setLoading(true);
+    setError(null);
+    setPrediction(null);
+    
     try {
+      // Convert all string values to numbers
+      const numericData = {};
+      for (const key in data) {
+        numericData[key] = parseFloat(data[key]);
+      }
+      
       // Use environment variable for API URL, fallback to localhost for dev
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      const response = await axios.post(`${apiUrl}/predict`, data);
+      console.log('Making prediction request to:', apiUrl);
+      console.log('Data:', numericData);
+      
+      const response = await axios.post(`${apiUrl}/predict`, numericData);
+      
+      console.log('Response:', response.data);
       
       // Backend returns { prediction: value, status: "success" }
       setPrediction(response.data.prediction);
       setError(null);
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to fetch prediction');
+      console.error('Prediction error:', err);
+      setError(err.response?.data?.error || err.message || 'Failed to fetch prediction');
       setPrediction(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -255,7 +274,14 @@ export default function Home() {
               </FormErrorMessage>
             </FormControl>
 
-            <Button type="submit" colorScheme="blue" width="full" mt={4}>
+            <Button 
+              type="submit" 
+              colorScheme="blue" 
+              width="full" 
+              mt={4}
+              isLoading={loading}
+              loadingText="Predicting..."
+            >
               Predict Price
             </Button>
           </VStack>
