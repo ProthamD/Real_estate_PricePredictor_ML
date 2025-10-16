@@ -40,8 +40,11 @@ def predict():
         # Use the combined pipeline (preprocessing + prediction)
         prediction = pipeline.predict(input_data)[0]
         
+        # Convert prediction to thousands (model predicts in $1000s)
+        prediction_value = float(prediction) * 1000
+        
         return jsonify({
-            "prediction": round(float(prediction), 3),
+            "prediction": round(prediction_value, 3),
             "status": "success"
         })
         
