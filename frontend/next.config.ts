@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',  // Enable static HTML export for GitHub Pages
-  basePath: '/Real_Estate',  // GitHub Pages subdirectory (change if repo name differs)
-  assetPrefix: '/Real_Estate/',
+  basePath: '/Real_estate_PricePredictor_ML',  // Match your GitHub repo name
+  assetPrefix: '/Real_estate_PricePredictor_ML/',
   images: {
     unoptimized: true,  // GitHub Pages doesn't support Next.js Image Optimization
   },
