@@ -34,8 +34,11 @@ def predict():
         if not data:
             return jsonify({"error": "No input data provided"}), 400
             
-        # Convert input to DataFrame
-        input_data = pd.DataFrame([data])
+        # Define the correct feature order (as used during training)
+        feature_order = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+        
+        # Convert input to DataFrame with correct column order
+        input_data = pd.DataFrame([data], columns=feature_order)
         
         # Use the combined pipeline (preprocessing + prediction)
         prediction = pipeline.predict(input_data)[0]
